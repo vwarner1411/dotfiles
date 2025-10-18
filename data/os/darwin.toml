@@ -1,0 +1,2 @@
+default_shell = "zsh"
+package_manager = "brew"

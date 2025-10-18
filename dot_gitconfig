@@ -2,4 +2,4 @@
 	email = valerie.warner@ink.fish
 	name = Valerie Warner
 [core]
-	editor = vim
+	editor = nvim

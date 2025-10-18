@@ -1,0 +1,15 @@
+# Global chezmoi configuration with convenient template data
+
+[data]
+  [data.machine]
+    os = {{ quote .chezmoi.os }}
+    arch = {{ quote .chezmoi.arch }}
+    hostname = {{ quote .chezmoi.hostname }}
+    username = {{ quote .chezmoi.username }}
+  [data.paths]
+    home = {{ quote .chezmoi.homeDir }}
+    btop_theme = {{ quote (joinPath .chezmoi.homeDir ".config/btop/themes/dracula.theme") }}
+
+[git]
+  autoCommit = false
+  autoPush = false
