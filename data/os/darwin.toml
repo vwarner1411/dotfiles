@@ -1,2 +1,48 @@
 default_shell = "zsh"
 package_manager = "brew"
+
+[nvim]
+bin = "/opt/homebrew/bin/nvim"
+
+[zsh]
+extra = [".zshrc.d/macos.zsh"]
+
+  [[zsh.aliases]]
+  name = "python"
+  command = "python3"
+
+  [[zsh.aliases]]
+  name = "pip"
+  command = "pip3"
+
+  [[zsh.aliases]]
+  name = "powershell"
+  command = "pwsh"
+
+  [[zsh.aliases]]
+  name = "mosh"
+  command = "/opt/homebrew/bin/mosh -a --server='mosh-server && /bin/bash /usr/local/bin/mosh-allow-ufw'"
+
+  [[zsh.aliases]]
+  name = "brewski"
+  command = "brew update && brew upgrade && brew cleanup -s && brew doctor && brew missing"
+
+  [[zsh.aliases]]
+  name = "killadobe"
+  command = "for pid in $(ps ax | grep -i adobe | awk '{print $1}' | sed \\$d); do sudo kill -9 $pid 2>/dev/null; done"
+
+  [[zsh.aliases]]
+  name = "youtube-dl-1080"
+  command = "/opt/homebrew/bin/yt-dlp -c -f 137+140 -o '%(title)s.%(ext)s' --external-downloader aria2c --downloader-args 'aria2c:-c -j 16 -x 16 -s 16 -k 5M'"
+
+  [[zsh.aliases]]
+  name = "youtube-dl"
+  command = "/opt/homebrew/bin/yt-dlp -c -S res,ext:mp4:m4a -o '%(title)s.%(ext)s' --external-downloader aria2c --downloader-args 'aria2c:-c -j 16 -x 16 -s 16 -k 5M'"
+
+  [[zsh.aliases]]
+  name = "touchsudo"
+  command = "sudo sed -i -e '1s/$/\\nauth       sufficient     pam_tid.so/' /etc/pam.d/sudo"
+
+  [[zsh.aliases]]
+  name = "rsync"
+  command = "/opt/homebrew/bin/rsync"

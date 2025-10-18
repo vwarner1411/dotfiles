@@ -1,0 +1,62 @@
+{{- $osData := (include (printf "data/os/%s.toml" .chezmoi.os) | fromToml) -}}
+{{- $nvim := "nvim" -}}
+{{- with $osData.nvim }}
+  {{- with .bin }}
+    {{- $nvim = . -}}
+  {{- end }}
+{{- end }}
+{{- $extraZsh := list -}}
+{{- with $osData.zsh }}
+  {{- with .extra }}
+    {{- $extraZsh = . -}}
+  {{- end }}
+{{- end }}
+
+# History size
+export HISTSIZE=10000
+export HISTFILESIZE=10000
+
+typeset -U PATH path
+
+# Oh-My-Zsh base
+export ZSH="$HOME/.oh-my-zsh"
+FPATH=$ZSH/custom/plugins/zsh-completions/src:$FPATH
+
+ZSH_THEME="dracula-pro"   # falls back to "dracula" automatically
+plugins=(git autoupdate zsh-syntax-highlighting zsh-autosuggestions \
+         zsh-completions jsontools)
+source $ZSH/oh-my-zsh.sh
+
+# Aliases
+alias vi='{{ $nvim }} -u ~/.nvimrc'
+alias vim='{{ $nvim }} -u ~/.nvimrc'
+alias nvim='{{ $nvim }} -u ~/.nvimrc'
+alias l='lsd -l'
+alias ll='lsd -la'
+alias ls='lsd'
+
+{{- with $osData.zsh.aliases }}
+# Additional OS-specific aliases
+{{- range . }}
+alias {{ .name }}="{{ .command }}"
+{{- end }}
+{{- end }}
+
+setopt extended_glob \
+       hist_ignore_dups \
+       hist_reduce_blanks \
+       share_history \
+       inc_append_history
+
+autoload -Uz zmv
+eval "$(starship init zsh)"
+source <(fzf --zsh)
+
+{{- if gt (len $extraZsh) 0 }}
+# OS-specific customizations
+{{- range $path := $extraZsh }}
+if [[ -f {{ quote (joinPath $.chezmoi.homeDir $path) }} ]]; then
+  source {{ quote (joinPath $.chezmoi.homeDir $path) }}
+fi
+{{- end }}
+{{- end }}

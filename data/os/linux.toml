@@ -1,2 +1,36 @@
 default_shell = "zsh"
 package_manager = "apt"
+
+[nvim]
+bin = "/usr/bin/nvim"
+
+[zsh]
+extra = [".zshrc.d/linux.zsh"]
+
+  [[zsh.aliases]]
+  name = "python"
+  command = "python3"
+
+  [[zsh.aliases]]
+  name = "pip"
+  command = "pip3"
+
+  [[zsh.aliases]]
+  name = "powershell"
+  command = "pwsh"
+
+  [[zsh.aliases]]
+  name = "brewski"
+  command = "sudo apt update && sudo apt upgrade -y && sudo apt autoremove -y"
+
+  [[zsh.aliases]]
+  name = "mosh"
+  command = "mosh -a"
+
+  [[zsh.aliases]]
+  name = "youtube-dl-1080"
+  command = "yt-dlp -c -f 137+140 -o '%(title)s.%(ext)s' --external-downloader aria2c --downloader-args 'aria2c:-c -j 16 -x 16 -s 16 -k 5M'"
+
+  [[zsh.aliases]]
+  name = "youtube-dl"
+  command = "yt-dlp -c -S res,ext:mp4:m4a -o '%(title)s.%(ext)s' --external-downloader aria2c --downloader-args 'aria2c:-c -j 16 -x 16 -s 16 -k 5M'"
