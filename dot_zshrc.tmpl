@@ -42,7 +42,7 @@ alias l='lsd -l'
 alias ll='lsd -la'
 alias ls='lsd'
 {{- if gt (len $aliasList) 0 }}
-# Additional OS-specific aliases
+# Additional OS-specific aliases are sourced from data/os/*.toml
 {{- range $alias := $aliasList }}
 alias {{ $alias.name }}="{{ $alias.command }}"
 {{- end }}
