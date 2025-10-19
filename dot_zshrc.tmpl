@@ -1,16 +1,4 @@
-{{- $osData := (include (printf "data/os/%s.toml" .chezmoi.os) | fromToml) -}}
-{{- $nvim := "nvim" -}}
-{{- with $osData.nvim }}
-  {{- with .bin }}
-    {{- $nvim = . -}}
-  {{- end }}
-{{- end }}
-{{- $extraZsh := list -}}
-{{- with $osData.zsh }}
-  {{- with .extra }}
-    {{- $extraZsh = . -}}
-  {{- end }}
-{{- end }}
+
 
 # History size
 export HISTSIZE=10000
@@ -29,19 +17,20 @@ plugins=(git autoupdate zsh-syntax-highlighting zsh-autosuggestions \
 source $ZSH/oh-my-zsh.sh
 
 # Aliases
-alias vi='{{ $nvim }} -u ~/.nvimrc'
-alias vim='{{ $nvim }} -u ~/.nvimrc'
-alias nvim='{{ $nvim }} -u ~/.nvimrc'
+alias vi='/usr/bin/nvim -u ~/.nvimrc'
+alias vim='/usr/bin/nvim -u ~/.nvimrc'
+alias nvim='/usr/bin/nvim -u ~/.nvimrc'
 alias l='lsd -l'
 alias ll='lsd -la'
 alias ls='lsd'
-
-{{- with $osData.zsh.aliases }}
 # Additional OS-specific aliases
-{{- range . }}
-alias {{ .name }}="{{ .command }}"
-{{- end }}
-{{- end }}
+alias python="python3"
+alias pip="pip3"
+alias powershell="pwsh"
+alias aptski="sudo apt update && sudo apt upgrade -y && sudo apt autoremove -y"
+alias mosh="mosh -a"
+alias youtube-dl-1080="yt-dlp -c -f 137+140 -o '%(title)s.%(ext)s' --external-downloader aria2c --downloader-args 'aria2c:-c -j 16 -x 16 -s 16 -k 5M'"
+alias youtube-dl="yt-dlp -c -S res,ext:mp4:m4a -o '%(title)s.%(ext)s' --external-downloader aria2c --downloader-args 'aria2c:-c -j 16 -x 16 -s 16 -k 5M'"
 
 # Session behaviour tweaks
 setopt extended_glob \
@@ -56,12 +45,7 @@ autoload -Uz zmv
 # Prompt and interactive helpers
 eval "$(starship init zsh)"
 source <(fzf --zsh)
-
-{{- if gt (len $extraZsh) 0 }}
 # Load OS-specific snippets
-{{- range $path := $extraZsh }}
-if [[ -f {{ quote (joinPath $.chezmoi.homeDir $path) }} ]]; then
-  source {{ quote (joinPath $.chezmoi.homeDir $path) }}
+if [[ -f "/home/warnerva/.zshrc.d/linux.zsh" ]]; then
+  source "/home/warnerva/.zshrc.d/linux.zsh"
 fi
-{{- end }}
-{{- end }}
