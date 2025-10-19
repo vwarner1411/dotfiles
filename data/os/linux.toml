@@ -20,7 +20,7 @@ extra = [".zshrc.d/linux.zsh"]
   command = "pwsh"
 
   [[zsh.aliases]]
-  name = "brewski"
+  name = "aptski"
   command = "sudo apt update && sudo apt upgrade -y && sudo apt autoremove -y"
 
   [[zsh.aliases]]

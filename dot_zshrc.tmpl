@@ -16,6 +16,7 @@
 export HISTSIZE=10000
 export HISTFILESIZE=10000
 
+# Normalize PATH so repeated entries collapse
 typeset -U PATH path
 
 # Oh-My-Zsh base
@@ -42,18 +43,22 @@ alias {{ .name }}="{{ .command }}"
 {{- end }}
 {{- end }}
 
+# Session behaviour tweaks
 setopt extended_glob \
        hist_ignore_dups \
        hist_reduce_blanks \
        share_history \
        inc_append_history
 
+# Handy builtins
 autoload -Uz zmv
+
+# Prompt and interactive helpers
 eval "$(starship init zsh)"
 source <(fzf --zsh)
 
 {{- if gt (len $extraZsh) 0 }}
-# OS-specific customizations
+# Load OS-specific snippets
 {{- range $path := $extraZsh }}
 if [[ -f {{ quote (joinPath $.chezmoi.homeDir $path) }} ]]; then
   source {{ quote (joinPath $.chezmoi.homeDir $path) }}
