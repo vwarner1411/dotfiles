@@ -2,7 +2,7 @@
 {{- $profile := "desktop" -}}
 {{- $configPath := joinPath .chezmoi.homeDir ".config/chezmoi/chezmoi.toml" -}}
 {{- $configStat := stat $configPath -}}
-{{- if $configStat.exists -}}
+{{- if $configStat -}}
   {{- $existing := include $configPath | fromToml -}}
   {{- with $existing.data.bootstrap_profile -}}
     {{- $profile = . -}}
