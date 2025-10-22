@@ -3,9 +3,11 @@
 {{- $configPath := joinPath .chezmoi.homeDir ".config/chezmoi/chezmoi.toml" -}}
 {{- $configStat := stat $configPath -}}
 {{- if $configStat -}}
-  {{- $existing := include $configPath | fromToml -}}
-  {{- with $existing.data.bootstrap_profile -}}
-    {{- $profile = . -}}
+  {{- $existingConfig := include $configPath | fromToml -}}
+  {{- with $existingConfig.data -}}
+    {{- with .bootstrap_profile -}}
+      {{- $profile = . -}}
+    {{- end -}}
   {{- end -}}
 {{- end -}}
 {{- with .bootstrap_profile -}}
@@ -14,7 +16,6 @@
 
 [data]
   bootstrap_profile = "{{ $profile }}"
-
   [data.machine]
     os = {{ quote .chezmoi.os }}
     arch = {{ quote .chezmoi.arch }}
