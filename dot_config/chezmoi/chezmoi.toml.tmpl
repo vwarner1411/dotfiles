@@ -1,7 +1,8 @@
 # Global chezmoi configuration with convenient template data
 {{- $profile := "desktop" -}}
 {{- $configPath := joinPath .chezmoi.homeDir ".config/chezmoi/chezmoi.toml" -}}
-{{- if fileExists $configPath -}}
+{{- $configStat := stat $configPath -}}
+{{- if $configStat.exists -}}
   {{- $existing := include $configPath | fromToml -}}
   {{- with $existing.data.bootstrap_profile -}}
     {{- $profile = . -}}
