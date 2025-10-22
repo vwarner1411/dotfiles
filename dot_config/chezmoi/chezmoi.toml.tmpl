@@ -12,10 +12,11 @@
 {{- end -}}
 {{- with .bootstrap_profile -}}
   {{- $profile = . -}}
-{{- end -}}
+{{- end }}
 
 [data]
   bootstrap_profile = "{{ $profile }}"
+
   [data.machine]
     os = {{ quote .chezmoi.os }}
     arch = {{ quote .chezmoi.arch }}
