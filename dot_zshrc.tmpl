@@ -1,4 +1,5 @@
 {{- $osData := (include (printf "data/os/%s.toml" .chezmoi.os) | fromToml) -}}
+{{- $profile := .bootstrap_profile | default "desktop" -}}
 {{- $nvim := "nvim" -}}
 {{- with $osData.nvim }}
   {{- with .bin }}
@@ -60,7 +61,11 @@ setopt extended_glob \
 autoload -Uz zmv
 
 # Prompt and interactive helpers
+{{- if ne $profile "server" }}
 eval "$(starship init zsh)"
+{{- else }}
+# starship disabled on server profile
+{{- end }}
 source <(fzf --zsh)
 
 {{- if gt (len $extraZsh) 0 }}
