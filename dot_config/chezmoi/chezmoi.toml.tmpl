@@ -1,5 +1,5 @@
 # Global chezmoi configuration with convenient template data
-{{- $profile := default "desktop" (index . "bootstrap_profile") -}}
+{{- $profile := default "desktop" (or (index . "bootstrap_profile") (index .data "bootstrap_profile")) -}}
 
 [data]
   bootstrap_profile = "{{ $profile }}"
