@@ -1,6 +1,9 @@
 # Global chezmoi configuration with convenient template data
+{{- $profile := default "desktop" (index . "bootstrap_profile") -}}
 
 [data]
+  bootstrap_profile = "{{ $profile }}"
+
   [data.machine]
     os = {{ quote .chezmoi.os }}
     arch = {{ quote .chezmoi.arch }}
