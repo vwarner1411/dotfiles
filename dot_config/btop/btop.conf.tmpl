@@ -203,7 +203,7 @@ io_graph_combined = False
 io_graph_speeds = ""
 
 #* Set fixed values for network graphs in Mebibits. Is only used if net_auto is also set to False.
-{{ $detectScript := joinPath .chezmoi.sourceDir "scripts/detect_net_speed.sh" }}
+{{ $detectScript := joinPath .chezmoi.sourceDir "dot_config/chezmoi/scripts/detect_net_speed.sh" }}
 {{ $netSpeed := trimSuffix "\n" (output $detectScript) }}
 net_download = {{ default "1000" $netSpeed }}
 

@@ -1,4 +1,5 @@
-{{- $osData := (include (printf "data/os/%s.toml" .chezmoi.os) | fromToml) -}}
+{{- $osDataPath := joinPath .chezmoi.sourceDir (printf "dot_config/chezmoi/data/os/%s.toml" .chezmoi.os) -}}
+{{- $osData := (include $osDataPath | fromToml) -}}
 {{- $profile := default "desktop" (index . "bootstrap_profile") -}}
 {{- $serverAliasSkip := dict "powershell" true "mosh" true "youtube-dl" true "youtube-dl-1080" true -}}
 {{- $nvim := "nvim" -}}
