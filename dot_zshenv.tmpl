@@ -1,0 +1,5 @@
+. "$HOME/.cargo/env"
+
+{{- if eq .chezmoi.os "linux" }}
+export skip_global_compinit=1
+{{- end }}
