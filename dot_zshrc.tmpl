@@ -38,11 +38,6 @@ plugins=(git autoupdate zsh-syntax-highlighting zsh-autosuggestions \
          zsh-completions)
 source $ZSH/oh-my-zsh.sh
 
-# zsh-autocomplete plugin
-if [[ -f "$ZSH/custom/plugins/zsh-autocomplete/zsh-autocomplete.plugin.zsh" ]]; then
-  source "$ZSH/custom/plugins/zsh-autocomplete/zsh-autocomplete.plugin.zsh"
-fi
-
 # Aliases
 alias vi='{{ $nvim }} -u ~/.nvimrc'
 alias vim='{{ $nvim }} -u ~/.nvimrc'
