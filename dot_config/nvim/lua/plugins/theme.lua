@@ -1,0 +1,1 @@
+/home/warnerva/.config/omarchy/current/theme/neovim.lua
