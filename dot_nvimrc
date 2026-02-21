@@ -1,16 +1,15 @@
-packadd! dracula_pro
+" Keep external Neovim config as the base when present.
+if filereadable(expand("~/.config/nvim/init.lua"))
+  execute "luafile " . fnameescape(expand("~/.config/nvim/init.lua"))
+endif
+
 syntax enable
-let g:dracula_colorterm = 0
-colorscheme dracula_pro
 
-" size of a hard tabstop
+" Dotfiles editing preferences
 set tabstop=2
-
-" always uses spaces instead of tab characters
-set expandtab
-
-" size of an "indent"
 set shiftwidth=2
-
-" disable visual mode by default
+set expandtab
 set mouse=n
+
+" Prefer Tokyo Night if available
+silent! colorscheme tokyonight-night
