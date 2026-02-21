@@ -24,10 +24,6 @@ extra = [".zshrc.d/macos.zsh"]
   command = "/opt/homebrew/bin/mosh -a --server='mosh-server && /bin/bash /usr/local/bin/mosh-allow-ufw'"
 
   [[zsh.aliases]]
-  name = "brewski"
-  command = "brew update && brew upgrade && brew cleanup -s && brew doctor && brew missing"
-
-  [[zsh.aliases]]
   name = "killadobe"
   command = "for pid in $(ps ax | grep -i adobe | awk '{print $1}' | sed \\$d); do sudo kill -9 $pid 2>/dev/null; done"
 
