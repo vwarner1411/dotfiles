@@ -117,11 +117,7 @@ if command -v fzf >/dev/null 2>&1; then
 fi
 
 if command -v starship >/dev/null 2>&1; then
-{{- if ne $profile "server" }}
   eval "$(starship init zsh)"
-{{- else }}
-  # starship disabled on server profile
-{{- end }}
 fi
 
 {{- if gt (len $extraZsh) 0 }}
