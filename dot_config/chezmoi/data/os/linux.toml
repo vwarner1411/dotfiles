@@ -2,7 +2,7 @@ default_shell = "zsh"
 package_manager = "apt"
 
 [nvim]
-bin = "/usr/bin/nvim"
+bin = "nvim"
 
 [zsh]
 extra = [".zshrc.d/linux.zsh"]
